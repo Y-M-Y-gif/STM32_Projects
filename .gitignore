@@ -1,0 +1,23 @@
+﻿# Keil MDK 文件忽略
+*.uvoptx
+*.uvguix.*
+*.axf
+*.hex
+*.bin
+*.elf
+*.map
+*.dep
+*.crf
+*.o
+*.d
+*.lst
+*.htm
+*.sct
+
+# Keil编译输出文件夹
+Objects/
+Listings/
+
+# Windows系统文件
+Thumbs.db
+.DS_Store
