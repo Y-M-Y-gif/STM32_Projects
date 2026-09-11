@@ -18,6 +18,9 @@ int main(void)
 		uint16_t crr1=duty*1000;
 		
 		TIM_SetCompare1(TIM1,crr1);
+		
+		Delay_ms(1);
+		tick++;
 	}
 }
 
@@ -29,7 +32,7 @@ void App_PWM_Init(void){
 	GPIO_InitTypeDef GPIO_InitStruct;
 	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_AF_PP;
 	GPIO_InitStruct.GPIO_Pin=GPIO_Pin_8;
-	GPIO_InitStruct.GPIO_Speed=GPIO_Speed_2MHz;
+	GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA,&GPIO_InitStruct);
 	
 	GPIO_InitStruct.GPIO_Pin=GPIO_Pin_13;
@@ -49,18 +52,16 @@ void App_PWM_Init(void){
 	
 	TIM_ARRPreloadConfig(TIM1,ENABLE);
 	
-	TIM_CCPreloadControl(TIM1,ENABLE);
-	
 	TIM_Cmd(TIM1,ENABLE);
 	
 	//配置输出比较参数
 	TIM_OCInitTypeDef TIM_OCInitStruct;
 	
 	TIM_OCInitStruct.TIM_OCMode=TIM_OCMode_PWM1;
-	TIM_OCInitStruct.TIM_OCNPolarity=TIM_OCPolarity_High;
-	TIM_OCInitStruct.TIM_OCPolarity-TIM_OCPolarity_High;
+	TIM_OCInitStruct.TIM_OCNPolarity=TIM_OCNPolarity_High;
+	TIM_OCInitStruct.TIM_OCPolarity=TIM_OCPolarity_High;
 	TIM_OCInitStruct.TIM_OutputNState=TIM_OutputNState_Enable;
-	TIM_OCInitStruct.TIM_OutputState=TIM_OutputNState_Enable;
+	TIM_OCInitStruct.TIM_OutputState=TIM_OutputState_Enable;
 	TIM_OCInitStruct.TIM_Pulse=0;
 	
 	TIM_OC1Init(TIM1,&TIM_OCInitStruct);
