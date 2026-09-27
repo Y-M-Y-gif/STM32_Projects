@@ -39,7 +39,7 @@ void Encoder_Init(void)
 	TIM_Cmd(TIM3,ENABLE);
 }
 
-int16_t Encode_Get(void)
+int16_t Encoder_Get(void)
 {
 	int16_t Temp;
 	Temp=TIM_GetCounter(TIM3);
