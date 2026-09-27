@@ -17,6 +17,7 @@ int main(void)
 	while (1)
 	{
 		OLED_ShowSignedNum(1, 5, Encode_Get(), 5);
+		Delay_ms(500);//人手控制比较慢
 	}
 }
 
