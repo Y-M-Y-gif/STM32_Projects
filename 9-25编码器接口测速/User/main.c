@@ -4,7 +4,7 @@
 #include "Timer.h"
 #include "Encoder.h"
 
-uint16_t Speed;
+int16_t Speed;
 
 int main(void)
 {
