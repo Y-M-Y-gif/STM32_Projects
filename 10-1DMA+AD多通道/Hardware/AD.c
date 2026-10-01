@@ -26,7 +26,7 @@ void AD_Init(void)
 
 	
 	ADC_InitTypeDef ADC_InitStruct;
-	ADC_InitStruct.ADC_ContinuousConvMode=DISABLE;
+	ADC_InitStruct.ADC_ContinuousConvMode=ENABLE;
 	ADC_InitStruct.ADC_DataAlign=ADC_DataAlign_Right;
 	ADC_InitStruct.ADC_ExternalTrigConv=ADC_ExternalTrigConv_None;//软件触发
 	ADC_InitStruct.ADC_Mode=ADC_Mode_Independent;
@@ -44,7 +44,7 @@ void AD_Init(void)
 	DMA_InitStruct.DMA_BufferSize=4;//指定传输计数器的值
 	DMA_InitStruct.DMA_DIR=DMA_DIR_PeripheralSRC;//外设站点作为源
 	DMA_InitStruct.DMA_M2M=DMA_M2M_Disable;//ADC1做好菜了再去端菜
-	DMA_InitStruct.DMA_Mode=DMA_Mode_Normal;//配置自动重装寄存器
+	DMA_InitStruct.DMA_Mode=DMA_Mode_Circular;//配置自动重装寄存器
 	DMA_InitStruct.DMA_Priority=DMA_Priority_Medium;
 	DMA_Init(DMA1_Channel1,&DMA_InitStruct);//ADC1的硬件触发对应到通道1固定死了
 	
@@ -57,18 +57,9 @@ void AD_Init(void)
 	while(ADC_GetResetCalibrationStatus(ADC1)==SET);
 	ADC_StartCalibration(ADC1);
 	while(ADC_GetCalibrationStatus(ADC1)==SET);
-}
-
-void AD_GetValue(void)
-{
-	DMA_Cmd(DMA1_Channel1,DISABLE);
-	DMA_SetCurrDataCounter(DMA1_Channel1,4);
-	DMA_Cmd(DMA1_Channel1,ENABLE);
 	
 	ADC_SoftwareStartConvCmd(ADC1,ENABLE);//ADC依旧软件触发，别和DMA搞混淆了
-	
-	while(DMA_GetFlagStatus(DMA1_FLAG_TC1)==RESET);
-	DMA_ClearFlag(DMA1_FLAG_TC1);
-	
-}	
+
+}
+
  
